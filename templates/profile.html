@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - AI Academic Helper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="file:///C:/Users/DELL/Desktop/PROJECTS/Academic Helper/static/styles.css">
+    <style>
+        /* Make the navbar sticky */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Smooth page transition */
+        .page-transition {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .page-transition-active {
+            opacity: 1;
+        }
+
+        /* Hover effect for links */
+        .nav-link:hover {
+            color: #ffcc00 !important;
+            text-decoration: underline;
+        }
+
+        /* Profile page content styles */
+        .profile-image-container img {
+            max-width: 200px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-text {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #007bff;
+            padding: 20px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="page-transition">
+
+<!-- Header / Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='logo.png') }}" width="30" height="30" alt="Logo" class="d-inline-block align-top">
+        Profile
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item {% if request.path == '/about' %}active{% endif %}">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item {% if request.path == '/profile' %}active{% endif %}">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item {% if request.path == '/resources' %}active{% endif %}">
+                <a class="nav-link" href="/resources">Resources</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Profile Page Content -->
+<div class="container mt-5">
+    <div class="profile-image-container mb-4">
+        <img src="{{ url_for('static', filename='profile_image.png') }}" class="img-fluid rounded-circle" alt="Profile Image">
+    </div>
+
+    <div class="profile-text bg-light p-4 rounded shadow-sm">
+        <h2 class="text-primary">Your Profile</h2>
+        <p class="mb-4">
+            Please enter your details below to complete your profile. This will help us provide you with the best learning resources and tailored content recommendations.
+        </p>
+
+        <!-- Profile Form Section -->
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h3>Create or Update Profile</h3>
+                <form method="POST" action="/profile">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Course of Study</label>
+                        <input type="text" class="form-control" id="course" name="course" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Current Academic Level</label>
+                        <input type="text" class="form-control" id="level" name="level" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interests">Learning Interests</label>
+                        <textarea class="form-control" id="interests" name="interests" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferences">Learning Preferences</label>
+                        <textarea class="form-control" id="preferences" name="preferences" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer bg-primary text-white mt-5 py-3">
+    <div class="container text-center">
+        <p>&copy; 2024 AI Academic Helper, Inc. | Contact: +233-55-456-7890</p>
+    </div>
+</footer>
+
+<!-- Smooth Page Transition Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Apply fade-in effect on page load
+    document.body.classList.add("page-transition-active");
+
+    // Apply fade-out effect on navigation link clicks
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = link.getAttribute("href");
+            if (href && href.startsWith("/") && !href.startsWith("http")) {
+                e.preventDefault();
+                document.body.classList.remove("page-transition-active");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 500); // Adjust this delay to control the transition speed
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

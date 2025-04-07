@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - AI Academic Helper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="file:///C:/Users/DELL/Desktop/PROJECTS/Academic Helper/static/styles.css">
+    <style>
+        /* Make the navbar sticky */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Smooth page transition */
+        .page-transition {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .page-transition-active {
+            opacity: 1;
+        }
+
+        /* Hover effect for links */
+        .nav-link:hover {
+            color: #ffcc00 !important;
+            text-decoration: underline;
+        }
+
+        /* About page content styles */
+        .about-image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-text {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #007bff;
+            padding: 20px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="page-transition">
+
+<!-- Header / Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='logo.png') }}" width="30" height="30" alt="Logo" class="d-inline-block align-top">
+        About
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/resources">Resources</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- About Page Content -->
+<div class="container mt-5">
+    <!-- Header Image Section -->
+    <div class="about-image-container mb-5">
+        <img src="{{ url_for('static', filename='about_image.jpeg') }}" class="img-fluid rounded shadow-sm" alt="About Image">
+    </div>
+
+    <!-- About Text Section -->
+    <div class="about-text bg-light p-5 rounded shadow-sm">
+        <h2 class="text-primary mb-4">About AI Academic Helper</h2>
+        <p class="lead">
+            AI Academic Helper is designed to assist students in excelling in their academic journey...
+        </p>
+        <!-- Features Section -->
+        <div class="row mb-4">
+            <!-- Card 1 -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Past Questions</h4>
+                        <p class="card-text">
+                            Access a wealth of past questions from various academic disciplines...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Study Resources</h4>
+                        <p class="card-text">
+                            Explore a variety of academic resources to enhance your understanding...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Video Tutorials</h4>
+                        <p class="card-text">
+                            Discover a curated collection of YouTube videos covering a wide range...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>At AI Academic Helper, we’re committed to providing high-quality content...</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer bg-primary text-white py-3 mt-5">
+    <div class="container">
+        <p class="mb-0 text-center">&copy; 2024 AI Academic Helper, Inc. | Contact: +233-55-456-7890</p>
+    </div>
+</footer>
+
+<!-- Smooth Page Transition Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add("page-transition-active");
+
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = link.getAttribute("href");
+            if (href && href.startsWith("/") && !href.startsWith("http")) {
+                e.preventDefault();
+                document.body.classList.remove("page-transition-active");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 500);
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
